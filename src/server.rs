@@ -22,3 +22,20 @@ const NO_ID_ERR: &str = "no ID or SKU provided for item";
 const NO_ITEM_ERR: &str = "the item requested was not found";
 const NO_STOCK_ERR: &str = "no stock provided for item";
 const UNSUFF_INV_ERR: &str = "not enough inventory for quantity change";
+
+#[derive(Debug)]
+pub struct StoreInventory {
+    inventory: Arc<Mutex<HashMap<String, Item>>>,
+}
+
+impl Default for StoreInventory {
+    fn default() -> Self {
+        StoreInventory {
+            inventory: Arc::new(Mutex::new(HashMap::<String, Item>::new())),
+        }
+    }
+}
+
+#[tonic::async_trait]
+impl Inventory for StoreInventory {}
+todo!("Add the rest of the inventory implmentation");
